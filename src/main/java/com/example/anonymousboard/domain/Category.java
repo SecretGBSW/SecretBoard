@@ -14,7 +14,7 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "content")
+    @OneToMany(mappedBy = "category")
     private List<Content> contents;
 
 }
