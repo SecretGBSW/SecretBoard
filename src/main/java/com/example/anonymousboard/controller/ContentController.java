@@ -3,6 +3,7 @@ package com.example.anonymousboard.controller;
 import com.example.anonymousboard.domain.Content;
 import com.example.anonymousboard.dto.ContentAddDto;
 import com.example.anonymousboard.dto.ContentGetDto;
+import com.example.anonymousboard.dto.ContentUpdateDto;
 import com.example.anonymousboard.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +41,10 @@ public class ContentController {
     @PutMapping("/{contentId}")
     public Content update(
             @PathVariable int category,
-            @PathVariable int contentId
-    ) {
-        return contentService.update(category, contentId);
+            @PathVariable int contentId,
+            @RequestBody ContentUpdateDto dto
+            ) {
+        return contentService.update(category, contentId, dto);
     }
 
     @DeleteMapping("/{contentId}")

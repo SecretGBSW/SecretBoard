@@ -4,6 +4,7 @@ import com.example.anonymousboard.domain.Category;
 import com.example.anonymousboard.domain.Content;
 import com.example.anonymousboard.dto.ContentAddDto;
 import com.example.anonymousboard.dto.ContentGetDto;
+import com.example.anonymousboard.dto.ContentUpdateDto;
 import com.example.anonymousboard.repository.CategoryRepository;
 import com.example.anonymousboard.repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class ContentService {
         return contentRepository.save(content);
     }
 
-    public Content update(int category, int contentId) {
+    public Content update(int category, int contentId, ContentUpdateDto dto) {
 
         Category findeCategory = categoryRepository.findById(category).orElse(null);
 
@@ -77,12 +78,32 @@ public class ContentService {
             throw new IllegalArgumentException("게시글이 존재하지 않습니다.");
         }
 
-        Content updateContent = new Content(
+        content = new Content(
+                dto.getTitle(),
+                dto.getContent(),
+                dto.getUser(),
+                content.getPw()
+        );
 
-        )
+        return contentRepository.save(content);
     }
 
     public String delete(int category, int contentId) {
+
+        Category findeCategory = categoryRepository.findById(category).orElse(null);
+
+        if(findeCategory == null) {
+            throw new IllegalArgumentException("삭제할 카테고리가 존재하지 않습니다.");
+        }
+
+        Content content = contentRepository.findById(contentId).orElse(null);
+
+        if(content == null) {
+            throw new IllegalArgumentException("삭제할 게시글이 존재하지 않습니다.");
+        }
+
+        contentRepository.deleteById(contentId);
+
         return "삭제되었습니다.";
     }
 }
