@@ -2,13 +2,15 @@ package com.example.anonymousboard.board.controller;
 
 import com.example.anonymousboard.board.domain.Comment;
 import com.example.anonymousboard.board.dto.*;
+import com.example.anonymousboard.board.dto.response.ResponseListDataDto;
+import com.example.anonymousboard.board.dto.response.ResponseMessageDto;
 import com.example.anonymousboard.board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/{category}/contents/{contentId}")
+@RequestMapping("/categories/{category}/contents/{contentId}/comment")
 public class CommentController {
 
     @Autowired

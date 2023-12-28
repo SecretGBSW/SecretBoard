@@ -2,20 +2,23 @@ package com.example.anonymousboard.board.controller;
 
 import com.example.anonymousboard.board.domain.Content;
 import com.example.anonymousboard.board.dto.*;
+import com.example.anonymousboard.board.dto.response.ResponseDataDto;
+import com.example.anonymousboard.board.dto.response.ResponseListDataDto;
+import com.example.anonymousboard.board.dto.response.ResponseMessageDto;
 import com.example.anonymousboard.board.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/{category}/content")
+@RequestMapping("/categories/{category}/contents")
 public class ContentController {
 
     @Autowired
     private ContentService contentService;
 
     @GetMapping
-    public ResponseListDataDto<ContentGetDto> contents(@PathVariable int category) {
+    public ResponseListDataDto<Content> contents(@PathVariable int category) {
         return new ResponseListDataDto<>(
                 HttpStatus.OK.toString(),
                 "message",

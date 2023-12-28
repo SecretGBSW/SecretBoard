@@ -8,5 +8,7 @@ import lombok.Setter;
 public class ContentGetDto {
     private int id;
     private String title;
+    private String content;
     private String writer;
+    private String pw;
 }
