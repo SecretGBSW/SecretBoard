@@ -62,14 +62,15 @@ public class ContentService {
         Content content = new Content(
                 dto.getTitle(),
                 dto.getContent(),
-                passwordEncoder.encode(dto.getWriter()),
-                dto.getPw()
+                dto.getWriter(),
+                passwordEncoder.encode(dto.getPw()),
+                findeCategory
         );
 
         return contentRepository.save(content);
     }
 
-    public Content update(int category, int contentId, ContentUpdateDto dto) {
+    public String update(int category, int contentId, ContentUpdateDto dto) {
 
         Category findeCategory = categoryRepository.findById(category).orElse(null);
 
@@ -83,18 +84,18 @@ public class ContentService {
             throw new IllegalArgumentException("게시글이 존재하지 않습니다.");
         }
 
-        if(passwordEncoder.matches(dto.getPw(), content.getPw())) {
+        if(!passwordEncoder.matches(dto.getPw(), content.getPw())) {
             throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 
-        content = new Content(
-                dto.getTitle(),
-                dto.getContent(),
-                dto.getWriter(),
-                content.getPw()
-        );
+        content.setTitle(dto.getTitle());
+        content.setContent(dto.getContent());
+        content.setWriter(dto.getWriter());
 
-        return contentRepository.save(content);
+
+        contentRepository.save(content);
+
+        return "게시글 수정이 완료되었습니다.";
     }
 
     public String delete(int category, int contentId, ContentDeleteDto dto) {
@@ -111,7 +112,7 @@ public class ContentService {
             throw new IllegalArgumentException("삭제할 게시글이 존재하지 않습니다.");
         }
 
-        if(passwordEncoder.matches(dto.getPw(), content.getPw())) {
+        if(!passwordEncoder.matches(dto.getPw(), content.getPw())) {
             throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 

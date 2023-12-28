@@ -36,7 +36,13 @@ public class CommentService {
             throw new IllegalArgumentException("카테고리가 없습니다.");
         }
 
-        return commentRepository.findAllById(contentId);
+        Content checkContent = contentRepository.findById(contentId).orElse(null);
+
+        if(checkContent == null) {
+            throw new IllegalArgumentException("게시글이 존재하지 않습니다.");
+        }
+
+        return commentRepository.findAllByContentId(contentId);
     }
 
     public String addComment(int category, int contentId, CommentAddDto dto) {
@@ -53,10 +59,11 @@ public class CommentService {
         }
 
         Comment addComment = new Comment(
-                passwordEncoder.encode(dto.getPw()),
-                dto.getWriter(),
-                dto.getTitle(),
-                dto.getContent()
+          passwordEncoder.encode(dto.getPw()),
+          dto.getWriter(),
+          dto.getTitle(),
+          dto.getContent(),
+          checkContent
         );
 
         commentRepository.save(addComment);
@@ -83,16 +90,13 @@ public class CommentService {
             throw new IllegalArgumentException("댓글이 존재하지 않습니다.");
         }
 
-        if(passwordEncoder.matches(dto.getPw(), checkComment.getPw())) {
+        if(!passwordEncoder.matches(dto.getPw(), checkComment.getPw())) {
             throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 
-        checkComment = new Comment(
-                dto.getPw(),
-                checkComment.getWriter(),
-                checkComment.getTitle(),
-                checkComment.getContent()
-        );
+        checkComment.setWriter(dto.getWriter());
+        checkComment.setTitle(dto.getTitle());
+        checkComment.setContents(dto.getContents());
 
         commentRepository.save(checkComment);
         return "댓글 수정이 완료되었습니다.";
@@ -117,7 +121,7 @@ public class CommentService {
             throw new IllegalArgumentException("댓글이 없습니다.");
         }
 
-        if(passwordEncoder.matches(dto.getPw(), checkComment.getPw())) {
+        if(!passwordEncoder.matches(dto.getPw(), checkComment.getPw())) {
             throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 
