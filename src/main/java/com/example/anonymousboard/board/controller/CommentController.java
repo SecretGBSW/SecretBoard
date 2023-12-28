@@ -27,8 +27,10 @@ public class CommentController {
             @PathVariable int contentId,
             @RequestBody CommentAddDto dto
     ) {
-        commentService.addComment(category, contentId, dto);
-        return new ResponseMessageDto(HttpStatus.OK.toString(), "댓글이 추가가 완료되었습니다.");
+        return new ResponseMessageDto(
+                HttpStatus.OK.toString(),
+                commentService.addComment(category, contentId, dto)
+        );
     }
 
     @PutMapping("/{commentId}")
@@ -38,8 +40,10 @@ public class CommentController {
             @PathVariable int commentId,
             @RequestBody CommentUpdateDto dto
     ) {
-        commentService.update(category, contentId, commentId, dto);
-        return new ResponseMessageDto(HttpStatus.OK.toString(), "댓글이 수정이 완료되었습니다.");
+        return new ResponseMessageDto(
+                HttpStatus.OK.toString(),
+                commentService.update(category, contentId, commentId, dto)
+        );
     }
 
     @DeleteMapping("/{commentId}")
@@ -50,7 +54,9 @@ public class CommentController {
             @RequestBody CommentDeleteDto dto
             ) {
 
-        commentService.delete(category, contentId, commentId, dto);
-        return new ResponseMessageDto(HttpStatus.OK.toString(), "댓글이 수정이 완료되었습니다.");
+        return new ResponseMessageDto(
+                HttpStatus.OK.toString(),
+                commentService.delete(category, contentId, commentId, dto)
+        );
     }
 }

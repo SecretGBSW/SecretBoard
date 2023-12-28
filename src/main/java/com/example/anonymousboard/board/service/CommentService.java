@@ -1,16 +1,14 @@
 package com.example.anonymousboard.board.service;
 
-import com.example.anonymousboard.board.dto.CommentDeleteDto;
-import com.example.anonymousboard.board.dto.ContentDeleteDto;
+import com.example.anonymousboard.board.dto.*;
 import com.example.anonymousboard.category.domain.Category;
 import com.example.anonymousboard.board.domain.Comment;
 import com.example.anonymousboard.board.domain.Content;
-import com.example.anonymousboard.board.dto.CommentAddDto;
-import com.example.anonymousboard.board.dto.CommentUpdateDto;
 import com.example.anonymousboard.category.repository.CategoryRepository;
 import com.example.anonymousboard.board.repository.CommentRepository;
 import com.example.anonymousboard.board.repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +39,7 @@ public class CommentService {
         return commentRepository.findAllById(contentId);
     }
 
-    public Comment addComment(int category, int contentId, CommentAddDto dto) {
+    public String addComment(int category, int contentId, CommentAddDto dto) {
         Category checkCategory = categoryRepository.findById(category).orElse(null);
 
         if(checkCategory == null) {
@@ -61,10 +59,12 @@ public class CommentService {
                 dto.getContent()
         );
 
-        return commentRepository.save(addComment);
+        commentRepository.save(addComment);
+
+        return "댓글이 추가가 완료되었습니다.";
     }
 
-    public Comment update(int category, int contentId, int commentId, CommentUpdateDto dto) {
+    public String update(int category, int contentId, int commentId, CommentUpdateDto dto) {
         Category checkCategory = categoryRepository.findById(category).orElse(null);
 
         if(checkCategory == null) {
@@ -94,7 +94,8 @@ public class CommentService {
                 checkComment.getContent()
         );
 
-        return commentRepository.save(checkComment);
+        commentRepository.save(checkComment);
+        return "댓글 수정이 완료되었습니다.";
     }
 
     public String delete(int category, int contentId, int commentId, CommentDeleteDto dto) {
@@ -122,6 +123,6 @@ public class CommentService {
 
         commentRepository.deleteById(commentId);
 
-        return "게시글이 삭제되었습니다.";
+        return "댓글이 수정이 완료되었습니다.";
     }
 }

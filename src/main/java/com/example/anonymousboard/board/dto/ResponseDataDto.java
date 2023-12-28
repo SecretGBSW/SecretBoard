@@ -1,11 +1,14 @@
 package com.example.anonymousboard.board.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Data
+@Getter
+@Setter
 public class ResponseDataDto<Data> {
     Map<String, String> status = new HashMap<>();
     private String state;
