@@ -1,4 +1,4 @@
-package com.example.anonymousboard.board.dto;
+package com.example.anonymousboard.board.dto.response;
 
 import lombok.Data;
 import lombok.Getter;

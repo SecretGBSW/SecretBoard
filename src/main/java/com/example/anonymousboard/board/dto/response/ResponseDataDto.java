@@ -1,4 +1,4 @@
-package com.example.anonymousboard.board.dto;
+package com.example.anonymousboard.board.dto.response;
 
 import lombok.Data;
 import lombok.Getter;
@@ -9,12 +9,14 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class ResponseMessageDto {
+public class ResponseDataDto<Data> {
     private String status;
     private String message;
+    private Data data;
 
-    public ResponseMessageDto(String state, String message) {
+    public ResponseDataDto(String state, String message, Data data) {
         this.status = state;
         this.message = message;
+        this.data = data;
     }
 }
