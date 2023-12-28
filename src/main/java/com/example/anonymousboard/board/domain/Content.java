@@ -31,10 +31,11 @@ public class Content {
     @OneToMany(mappedBy = "contents")
     private List<Comment> comments;
 
-    public Content(String title, String content, String writer, String pw) {
+    public Content(String title, String content, String writer, String pw, Category category) {
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.pw = pw;
+        this.category = category;
     }
 }
