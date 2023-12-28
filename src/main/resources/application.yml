@@ -8,9 +8,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  mvc:
+    servlet:
+      load-on-startup: 1
 
 server:
   port: 8097
+
 
 logging:
   level:
