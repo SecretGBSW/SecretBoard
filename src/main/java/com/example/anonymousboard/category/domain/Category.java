@@ -1,5 +1,6 @@
-package com.example.anonymousboard.domain;
+package com.example.anonymousboard.category.domain;
 
+import com.example.anonymousboard.board.domain.Content;
 import jakarta.persistence.*;
 import lombok.Data;
 
