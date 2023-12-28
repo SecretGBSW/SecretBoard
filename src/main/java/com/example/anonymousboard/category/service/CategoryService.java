@@ -1,7 +1,7 @@
-package com.example.anonymousboard.service;
+package com.example.anonymousboard.category.service;
 
-import com.example.anonymousboard.domain.Category;
-import com.example.anonymousboard.repository.CategoryRepository;
+import com.example.anonymousboard.category.domain.Category;
+import com.example.anonymousboard.category.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
