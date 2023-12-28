@@ -10,12 +10,11 @@ import java.util.Map;
 @Getter
 @Setter
 public class ResponseMessageDto {
-    Map<String, String> status = new HashMap<>();
-    private String state;
+    private String status;
     private String message;
 
     public ResponseMessageDto(String state, String message) {
-        status.put("status", state);
-        status.put("message",message);
+        this.status = state;
+        this.message = message;
     }
 }
