@@ -1,5 +1,6 @@
 package com.example.anonymousboard.board.service;
 
+import com.example.anonymousboard.board.dto.ContentDeleteDto;
 import com.example.anonymousboard.category.domain.Category;
 import com.example.anonymousboard.board.domain.Content;
 import com.example.anonymousboard.board.dto.ContentAddDto;
@@ -82,11 +83,9 @@ public class ContentService {
             throw new IllegalArgumentException("게시글이 존재하지 않습니다.");
         }
 
-        if(!content.getPw().equals(dto.getPw())) {
-            throw new IllegalArgumentException("비빌번호가 같지 않습니다.");
+        if(passwordEncoder.matches(dto.getPw(), content.getPw())) {
+            throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
-
-        if(passwordEncoder.matches(dto.getPw(), content.getPw()))
 
         content = new Content(
                 dto.getTitle(),
@@ -98,7 +97,7 @@ public class ContentService {
         return contentRepository.save(content);
     }
 
-    public String delete(int category, int contentId) {
+    public String delete(int category, int contentId, ContentDeleteDto dto) {
 
         Category findeCategory = categoryRepository.findById(category).orElse(null);
 
@@ -110,6 +109,10 @@ public class ContentService {
 
         if(content == null) {
             throw new IllegalArgumentException("삭제할 게시글이 존재하지 않습니다.");
+        }
+
+        if(passwordEncoder.matches(dto.getPw(), content.getPw())) {
+            throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 
         contentRepository.deleteById(contentId);

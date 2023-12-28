@@ -80,11 +80,11 @@ public class CommentService {
         Comment checkComment = commentRepository.findById(commentId).orElse(null);
 
         if(checkComment == null) {
-            throw new IllegalArgumentException("댓글이 없습니다.");
+            throw new IllegalArgumentException("댓글이 존재하지 않습니다.");
         }
 
-        if(!checkComment.getPw().equals(dto.getPw())) {
-            throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
+        if(passwordEncoder.matches(dto.getPw(), checkComment.getPw())) {
+            throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 
         checkComment = new Comment(
@@ -110,7 +110,13 @@ public class CommentService {
             throw new IllegalArgumentException("게시글이 없습니다.");
         }
 
-        if(!checkContent.getPw().equals(dto.getPw())) {
+        Comment checkComment = commentRepository.findById(commentId).orElse(null);
+
+        if(checkComment == null) {
+            throw new IllegalArgumentException("댓글이 없습니다.");
+        }
+
+        if(passwordEncoder.matches(dto.getPw(), checkComment.getPw())) {
             throw new IllegalArgumentException("비밀번호가 같지 않습니다.");
         }
 
