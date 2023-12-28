@@ -26,14 +26,14 @@ public class ContentService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public List<ContentGetDto> getContents(int category) {
+    public List<Content> getContents(int category) {
         Category findeCategory = categoryRepository.findById(category).orElse(null);
 
         if(findeCategory == null) {
             throw new IllegalArgumentException("카테고리가 존재하지 않습니다.");
         }
 
-        return contentRepository.findByCategoryId(category);
+        return contentRepository.findAllByCategoryId(category);
     }
 
     public Content getContent(int category, int contentId) {

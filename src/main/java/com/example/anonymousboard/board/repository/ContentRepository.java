@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ContentRepository extends JpaRepository<Content, Integer> {
-    List<ContentGetDto> findByCategoryId(int category);
+    List<Content> findAllByCategoryId(int category);
 }
