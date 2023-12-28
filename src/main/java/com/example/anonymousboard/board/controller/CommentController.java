@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/categories/{category}/contents/{contentId}/comment")
+@RequestMapping("/categories/{category}/contents/{contentId}/comments")
 public class CommentController {
 
     @Autowired
@@ -21,7 +21,11 @@ public class CommentController {
             @PathVariable int category,
             @PathVariable int contentId
     ) {
-        return new ResponseListDataDto<>(HttpStatus.OK.toString(), "message", commentService.getComments(category, contentId));
+        return new ResponseListDataDto<>(
+          HttpStatus.OK.toString(),
+          "message",
+          commentService.getComments(category, contentId)
+        );
     }
     @PostMapping
     public ResponseMessageDto addComment(

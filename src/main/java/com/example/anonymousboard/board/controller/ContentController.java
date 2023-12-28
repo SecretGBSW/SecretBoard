@@ -34,7 +34,7 @@ public class ContentController {
         contentService.add(category, dto);
         return new ResponseMessageDto(HttpStatus.OK.toString(), "게시글 추가가 완료되었습니다.");
     }
-
+//상세 조회
     @GetMapping("/{contentId}")
     public ResponseDataDto<Content> getContent(
             @PathVariable int category,
@@ -53,8 +53,10 @@ public class ContentController {
             @PathVariable int contentId,
             @RequestBody ContentUpdateDto dto
             ) {
-        contentService.update(category, contentId, dto);
-        return new ResponseMessageDto(HttpStatus.OK.toString(), "게시글 추가가 완료되었습니다.");
+        return new ResponseMessageDto(
+          HttpStatus.OK.toString(),
+          contentService.update(category, contentId, dto)
+        );
     }
 
     @DeleteMapping("/{contentId}")
@@ -63,7 +65,9 @@ public class ContentController {
             @PathVariable int contentId,
             @RequestBody ContentDeleteDto dto
     ) {
-        contentService.delete(category, contentId, dto);
-        return new ResponseMessageDto(HttpStatus.OK.toString(), "게시글 추가가 완료되었습니다.");
+        return new ResponseMessageDto(
+          HttpStatus.OK.toString(),
+          contentService.delete(category, contentId, dto)
+        );
     }
 }
