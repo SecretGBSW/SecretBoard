@@ -1,9 +1,11 @@
-package com.example.anonymousboard.controller;
+package com.example.anonymousboard.board.controller;
 
-import com.example.anonymousboard.domain.Comment;
-import com.example.anonymousboard.dto.CommentAddDto;
-import com.example.anonymousboard.dto.CommentUpdateDto;
-import com.example.anonymousboard.service.CommentService;
+import com.example.anonymousboard.board.domain.Comment;
+import com.example.anonymousboard.board.dto.CommentAddDto;
+import com.example.anonymousboard.board.dto.CommentDeleteDto;
+import com.example.anonymousboard.board.dto.CommentUpdateDto;
+import com.example.anonymousboard.board.dto.ContentDeleteDto;
+import com.example.anonymousboard.board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,8 +48,9 @@ public class CommentController {
     public String delete(
             @PathVariable int category,
             @PathVariable int contentId,
-            @PathVariable int commentId
-    ) {
-        return commentService.delete(category, contentId, commentId);
+            @PathVariable int commentId,
+            @RequestBody CommentDeleteDto dto
+            ) {
+        return commentService.delete(category, contentId, commentId, dto);
     }
 }

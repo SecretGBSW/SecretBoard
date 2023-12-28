@@ -1,4 +1,4 @@
-package com.example.anonymousboard.domain;
+package com.example.anonymousboard.board.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
