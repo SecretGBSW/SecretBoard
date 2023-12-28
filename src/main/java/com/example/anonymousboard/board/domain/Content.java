@@ -1,11 +1,10 @@
-package com.example.anonymousboard.domain;
+package com.example.anonymousboard.board.domain;
 
+import com.example.anonymousboard.category.domain.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Comments;
 
 import java.util.List;
 
@@ -29,8 +28,8 @@ public class Content {
     @JsonIgnore
     private Category category;
 
-    @OneToMany(mappedBy = "comment")
-    private List<Comments> comments;
+    @OneToMany(mappedBy = "contents")
+    private List<Comment> comments;
 
     public Content(String title, String content, String writer, String pw) {
         this.title = title;

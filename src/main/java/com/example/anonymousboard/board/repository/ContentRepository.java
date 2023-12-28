@@ -1,7 +1,7 @@
-package com.example.anonymousboard.repository;
+package com.example.anonymousboard.board.repository;
 
-import com.example.anonymousboard.domain.Content;
-import com.example.anonymousboard.dto.ContentGetDto;
+import com.example.anonymousboard.board.domain.Content;
+import com.example.anonymousboard.board.dto.ContentGetDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,13 +1,14 @@
-package com.example.anonymousboard.service;
+package com.example.anonymousboard.board.service;
 
-import com.example.anonymousboard.domain.Category;
-import com.example.anonymousboard.domain.Content;
-import com.example.anonymousboard.dto.ContentAddDto;
-import com.example.anonymousboard.dto.ContentGetDto;
-import com.example.anonymousboard.dto.ContentUpdateDto;
-import com.example.anonymousboard.repository.CategoryRepository;
-import com.example.anonymousboard.repository.ContentRepository;
+import com.example.anonymousboard.category.domain.Category;
+import com.example.anonymousboard.board.domain.Content;
+import com.example.anonymousboard.board.dto.ContentAddDto;
+import com.example.anonymousboard.board.dto.ContentGetDto;
+import com.example.anonymousboard.board.dto.ContentUpdateDto;
+import com.example.anonymousboard.category.repository.CategoryRepository;
+import com.example.anonymousboard.board.repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class ContentService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<ContentGetDto> getContents(int category) {
         Category findeCategory = categoryRepository.findById(category).orElse(null);
@@ -57,7 +61,7 @@ public class ContentService {
         Content content = new Content(
                 dto.getTitle(),
                 dto.getContent(),
-                dto.getUser(),
+                passwordEncoder.encode(dto.getWriter()),
                 dto.getPw()
         );
 
@@ -78,10 +82,16 @@ public class ContentService {
             throw new IllegalArgumentException("게시글이 존재하지 않습니다.");
         }
 
+        if(!content.getPw().equals(dto.getPw())) {
+            throw new IllegalArgumentException("비빌번호가 같지 않습니다.");
+        }
+
+        if(passwordEncoder.matches(dto.getPw(), content.getPw()))
+
         content = new Content(
                 dto.getTitle(),
                 dto.getContent(),
-                dto.getUser(),
+                dto.getWriter(),
                 content.getPw()
         );
 
