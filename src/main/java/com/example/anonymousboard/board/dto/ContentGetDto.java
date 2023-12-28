@@ -1,5 +1,6 @@
 package com.example.anonymousboard.board.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,6 @@ public class ContentGetDto {
     private String title;
     private String content;
     private String writer;
+    @JsonIgnore
     private String pw;
 }

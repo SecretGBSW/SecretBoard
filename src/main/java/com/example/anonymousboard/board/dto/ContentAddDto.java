@@ -10,6 +10,5 @@ public class ContentAddDto {
     private String title;
     private String content;
     private String writer;
-    @JsonIgnore
     private String pw;
 }
