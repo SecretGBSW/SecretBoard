@@ -5,6 +5,8 @@ import lombok.Getter;
 
 @Getter
 public class CommentUpdateDto {
-    @JsonIgnore
     private String pw;
+    private String writer;
+    private String title;
+    private String contents;
 }
