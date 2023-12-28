@@ -18,17 +18,18 @@ public class Comment {
 
     private String writer;
     private String title;
-    private String content;
+    private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "content_id")
     @JsonIgnore
-    private Content contents;
+    private Content content;
 
-    public Comment(String pw, String writer, String title, String content) {
+    public Comment(String pw, String writer, String title, String contents, Content content) {
         this.pw = pw;
         this.writer = writer;
         this.title = title;
+        this.contents = contents;
         this.content = content;
     }
 }
