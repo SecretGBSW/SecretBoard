@@ -21,7 +21,7 @@ public class ContentController {
     public ResponseListDataDto<Content> contents(@PathVariable int category) {
         return new ResponseListDataDto<>(
                 HttpStatus.OK.toString(),
-                "message",
+                "조회 성공",
                 contentService.getContents(category)
         );
     }
