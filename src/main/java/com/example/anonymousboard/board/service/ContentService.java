@@ -118,6 +118,6 @@ public class ContentService {
 
         contentRepository.deleteById(contentId);
 
-        return "삭제되었습니다.";
+        return "게시글이 삭제되었습니다.";
     }
 }

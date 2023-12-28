@@ -127,6 +127,6 @@ public class CommentService {
 
         commentRepository.deleteById(commentId);
 
-        return "댓글이 수정이 완료되었습니다.";
+        return "댓글 삭제가 완료되었습니다.";
     }
 }
