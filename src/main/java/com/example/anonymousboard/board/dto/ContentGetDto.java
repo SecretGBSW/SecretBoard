@@ -1,4 +1,4 @@
-package com.example.anonymousboard.dto;
+package com.example.anonymousboard.board.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ContentGetDto {
+    private int id;
     private String title;
-    private String user;
+    private String writer;
 }
