@@ -1,4 +1,4 @@
-package com.example.anonymousboard.auth.config;
+package com.example.anonymousboard.web.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -9,12 +9,26 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-public class SecurityConfig {
-
+public class SecurityConfig implements WebMvcConfigurer{
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry
+      .addMapping("/**")
+      .allowedOrigins("*")
+      .allowedMethods(
+        HttpMethod.GET.name(),
+        HttpMethod.HEAD.name(),
+        HttpMethod.POST.name(),
+        HttpMethod.PUT.name(),
+        HttpMethod.DELETE.name()
+      );
+  }
   @Bean
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http
