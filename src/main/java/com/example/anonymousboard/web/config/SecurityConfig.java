@@ -40,6 +40,17 @@ public class SecurityConfig implements WebMvcConfigurer{
       )
       .authorizeHttpRequests((authorize) ->
         authorize
+          .requestMatchers(
+            "/",
+            "/favicon.ico",
+            "/css/**",
+            "/html/**",
+            "/js/**",
+            "/images/**",
+            "/webjars/**",
+            "/png/**",
+            "/jpg/**"
+          ).permitAll()
 
           .requestMatchers(
             "/**"
