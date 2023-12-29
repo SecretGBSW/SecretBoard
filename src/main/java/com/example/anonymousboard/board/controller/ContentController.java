@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categories/{category}/contents")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContentController {
 
     @Autowired
