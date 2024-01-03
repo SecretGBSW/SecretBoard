@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categories/{category}/contents")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContentController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class ContentController {
         );
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseMessageDto add(
             @PathVariable int category,
             @RequestBody ContentAddDto dto

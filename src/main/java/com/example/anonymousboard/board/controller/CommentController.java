@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categories/{category}/contents/{contentId}/comments")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommentController {
 
     @Autowired
