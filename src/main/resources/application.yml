@@ -11,6 +11,10 @@ spring:
   mvc:
     servlet:
       load-on-startup: 1
+  security:
+    user:
+      name: user
+      password: f4792016-f8ca-45b5-9e2a-f6b8a869d64e
 
 server:
   port: 8097
